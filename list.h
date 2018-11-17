@@ -21,7 +21,8 @@ class LinkedList {
   void append(Student*); //Appends a value to the end, just uses insert() at the end
   void insert(int index, Student*); //Inserts a value to a spot in the list
   void remove(int index);  //Removes a node at an index
-  void deleteStudent(Student*);
+  void deleteStudent(Student*); //Deletes all students matching the pointer
+  void deleteStudent(char*); //Deletes all students matching the char*
   void clear(); //Delete's all nodes from the array
   int size(); //Returns the size of the list
 

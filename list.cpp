@@ -1,3 +1,4 @@
+#include <string.h>
 #include "list.h"
 #include "node.h"
 
@@ -89,6 +90,16 @@ void LinkedList::clear(){ //Clears the list using remove()
     remove(0);
 }
 
+void LinkedList::deleteStudent(Student* s){ //Delete's all students in the list matching the pointer
+  for(int i = 0; i < length; i++) //Loop over list
+    if(at(i)->getStudent() == s) //If we found a matching node
+      remove(i); //Remove them
+}
+void LinkedList::deleteStudent(char* name){ //Delete all students with a given name
+  for(int i = 0; i  < length; i++)
+    if(strcmp(at(i)->getStudent()->getName(), name) == 0) //If a student with a matching name is found
+      remove(i); //Remove them
+}
 //Append just calls insert() at the end of the list
 void LinkedList::append(Student* s){
   this->insert(length, s);
@@ -99,9 +110,9 @@ int LinkedList::size(){ //Returns length
   return this->length;
 }
 
-Node* LinkedList::begin(){
+Node* LinkedList::begin(){ //Return first node in list
   return this->first;
 }
-Node* LinkedList::end(){
+Node* LinkedList::end(){ //Return last node in list
   return this->last;
 }
