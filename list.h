@@ -1,27 +1,32 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include <iostream>
 #include "node.h"
+#include "student.h"
 
 class LinkedList {
  private:
-  Node* first;
-  Node* last;
-  int length;
+  Node* first; //First node in list
+  Node* last; //Last node in list
+  int length; //Length of list
  public:
-  LinkedList();
+  LinkedList(); //Constructor, defaults first, last, and length to 0
 
-  Node* operator[] (int);
-  Node* at(int index);
+  friend std::ostream& operator<<(std::ostream& os, const LinkedList& list); //Printing out the list using << 
 
-  void append(int value);
-  void insert(int index, int value);
-  void remove(int index);
-  void clear();
-  int size();
+  Node* operator[] (int); //Overloads the [] operator
+  Node* at(int index); //Accesses a node in the list
 
-  Node* end();
-  Node* begin();
+  void append(Student*); //Appends a value to the end, just uses insert() at the end
+  void insert(int index, Student*); //Inserts a value to a spot in the list
+  void remove(int index);  //Removes a node at an index
+  void deleteStudent(Student*);
+  void clear(); //Delete's all nodes from the array
+  int size(); //Returns the size of the list
+
+  Node* end(); //Returns the last node in the list
+  Node* begin(); //Returns the first node in the list
 };
 
 #endif

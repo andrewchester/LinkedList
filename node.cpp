@@ -1,15 +1,13 @@
-
-
 #include "node.h"
 
-Node::Node(Node* previous = 0, Node* next = 0){
+Node::Node(Student* s, Node* previous = 0, Node* next = 0){
   this->previous = previous;
   this->next = next;
-  this->value = 0;
+  this->s = s;
 }
 
 Node::~Node(){
-  delete next, previous;
+  delete s;
 }
 
 Node* Node::getNext(){
@@ -26,10 +24,10 @@ void Node::setPrevious(Node* node){
   this->previous = node;
 }
 
-int Node::getValue(){
-  return this->value;
+Student* Node::getStudent(){
+  return this->s;
 }
-void Node::setValue(int value){
-  this->value = value;
+void Node::setStudent(Student* s){
+  this->s = s;
 }
 
