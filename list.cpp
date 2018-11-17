@@ -1,59 +1,67 @@
+#include <iostream>
+
 #include "list.h"
+#include "node.h"
 
 LinkedList::LinkedList(){
-  this->size = 0;
+  this->length = 0;
   this->first = 0;
   this->last = 0;
 }
 
-void LinkedList::add(Student* student){
-  if(size == 0){
-    this->first = new Node();
-    first->setStudent(student);
-    this->last = first;
-    size++;
-    return;
+/// Accessing Values ///
+Node* LinkedList::at(int index){
+  if(index > length){
+    std::cout << "Out of bounds error during at()" << std::endl;
+    exit(0);
   }
-  Node* node = new Node();
-  last->setNext(node);
-  size++;
+
+  if(index < 0 || index == length)
+    return 0;
+
+  Node* current = this->first;
+  for(int i = 0; i < index; i++)
+    current = current->getNext();
+  return current;
 }
+
+Node* LinkedList::operator[](int index){
+  return at(index);
+}
+
+/// Adding/Removing values ///
 void LinkedList::insert(int index, int value){
-  Node* insertedNode = new Node();
-  insertedNode->setStudent(student);
-  Node* indexNode = this->first;
-  for(int i = 0; i < index; i++){
-    indexNode = indexNode->getNext();
-  }
-  indexNode->getPrevious()->setNext(insertedNode);
-  indexNode->setPrevious(insertedNode);
+  std::cout << "Appending at " << index << " size of list = " << length << std::endl; 
+  Node* f = at(index - 1);
+  Node* s = at(index);
 
-  insertedNode->setPrevious(indexNode->getPrevious());
-  insertedNode->setNext(indexNode);
+  std::cout << "f = " << f << " s = " << s << std::endl;
 
-  this->size++;
-}
-
-void LinkedList::remove(int index){
-  Node* indexNode = this->first;
-  for(int i = 0; i < index; i++){
-    indexNode = indexNode->getNext();
-  }
-
-  indexNode->getPrevious()->setNext(indexNode->getNext());
-  indexNode->getNext()->setPrevious(indexNode->getPrevious());
+  Node* newNode = new Node(f, s);
+  newNode->setValue(value);
   
-  delete indexNode;
-  this->size--;
+  if(f != 0)
+    f->setNext(newNode);
+  else
+    this->first = newNode;
+
+  std::cout << "first: " << this->first->getValue();
+
+  if(s != 0)
+    s->setPrevious(newNode);
+  else
+    this->last = newNode;
+
+  std::cout << " last: " << this->last->getValue() << std::endl;
+
+  length++;
 }
 
-void LinkedList::clear(){
-  while(this->first != this->last){
-    this->last = this->last->getPrevious();
-    delete this->last->getNext();
-    this->last->setNext(0);
-    size--;
-  }
-  delete last;
-  this->last = 0, this->first = 0, this->size = 0;
+void LinkedList::append(int value){
+  this->insert(length, value);
+}
+
+/// Other ///
+int LinkedList::size(){
+  return this->length;
 }

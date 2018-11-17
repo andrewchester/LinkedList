@@ -1,3 +1,6 @@
+#ifndef NODE_H
+#define NODE_H
+
 class Node {
  private:
   int value;
@@ -5,8 +8,7 @@ class Node {
   Node* previous;
 
  public:
-  Node(Node* next, Node* previous);
-  Node();
+  Node(Node* previous, Node* next);
   ~Node();
   
   Node* getNext();
@@ -14,4 +16,9 @@ class Node {
 
   void setNext(Node* node);
   void setPrevious(Node* node);
+
+  void setValue(int value);
+  int getValue();
 };
+
+#endif

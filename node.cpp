@@ -1,18 +1,15 @@
 
-Node::Node(){
-  this->previous = 0;
-  this->next = 0;
-  this->student = 0;
-}
 
-Node::Node(Node* next = 0, Node* previous = 0){
+#include "node.h"
+
+Node::Node(Node* previous = 0, Node* next = 0){
   this->previous = previous;
-  this->next = 0;
-  this->student = 0;
+  this->next = next;
+  this->value = 0;
 }
 
 Node::~Node(){
-  delete this->next, this->previous, this->student;
+  delete next, previous;
 }
 
 Node* Node::getNext(){
@@ -22,7 +19,6 @@ Node* Node::getPrevious(){
   return this->previous;
 }
 
-
 void Node::setNext(Node* node){
   this->next = node;
 }
@@ -30,6 +26,10 @@ void Node::setPrevious(Node* node){
   this->previous = node;
 }
 
-void Node::setStudent(Student* student){
-  this->student = student;
+int Node::getValue(){
+  return this->value;
 }
+void Node::setValue(int value){
+  this->value = value;
+}
+
