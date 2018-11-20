@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <stdio.h>
 #include "list.h"
 #include "student.h"
 
@@ -11,7 +12,6 @@ void genStudents(LinkedList* list){
   char finalstring[8] = "name";
 
   for(int i = 0; i < 10; i++){ //Loop 10 times
-
     //Concatenate i to finalstring to produce name0, name1, etc
     sprintf(intstr, "%d", i); 
     strcat(finalstring, intstr);
@@ -30,13 +30,13 @@ int main(){
 
   genStudents(&list); //Generating students
 
-  std::cout << "List: " << std::endl << list << std::endl; //<< is overloaded in list.cpp, so you can print out the list like this
+  std::cout << "List(size: " << list.size() << "):" << std::endl << list << std::endl; //<< is overloaded in list.cpp, so you can print out the list like this
 
   std::cout << "Removing elements 3 and 4..." << std::endl;
   list.remove(3); //Remove elements from the list
   list.remove(4);
 
-  std::cout << "List: " << std::endl << list << std::endl;
+  std::cout << "List(size: " << list.size() << "):" << std::endl << list << std::endl;
 
   std::cout << "Inserting two students..." << std::endl;
 
@@ -46,19 +46,19 @@ int main(){
   Student* s1 = new Student(const_cast<char*>("newstudent2"), 101);
   list.insert(2, s1);
 
-  std::cout << "List: " << std::endl << list << std::endl;
+  std::cout << "List(size: " << list.size() << "):" << std::endl << list << std::endl;
 
   std::cout << "Deleting two students..." << std::endl;
   
   list.deleteStudent(s); //Delete students from the list
   list.deleteStudent(const_cast<char*>("newstudent2"));
 
-  std::cout << "List: " << std::endl << list << std::endl;
+  std::cout << "List(size: " << list.size() << "):" << std::endl << list << std::endl;
 
   std::cout << "Clearing the list..." << std::endl;
   list.clear(); //Clear the list
 
-  std::cout << "List: " << std::endl << list << std::endl;
+  std::cout << "List(size: " << list.size() << "):" << std::endl << list << std::endl;
 
   return 0;
 }
